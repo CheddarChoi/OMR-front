@@ -4,6 +4,7 @@ import { Navbar, Container } from "react-bootstrap";
 import "./App.scss";
 
 import ScheduleList from "./components/ListSchedule";
+import ScheduleChart from "./components/ScheduleChart";
 import AddSchedule from "./components/AddSchedule";
 import Schedule from "./components/ScheduleDetail";
 
@@ -30,6 +31,11 @@ class App extends Component {
               </Link>
             </li>
             <li className="nav-item">
+              <Link to={"/chart"} className="nav-link">
+                Chart
+              </Link>
+            </li>
+            <li className="nav-item">
               <Link to={"/add"} className="nav-link">
                 Add
               </Link>
@@ -52,6 +58,7 @@ class App extends Component {
               path={["/", "/home", "/schedules"]}
               component={ScheduleList}
             />
+            <Route exact path="/chart" component={ScheduleChart} />
             <Route exact path="/add" component={AddSchedule} />
             <Route path="/schedules/:id" component={Schedule} />
           </Switch>
