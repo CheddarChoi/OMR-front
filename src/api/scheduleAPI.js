@@ -25,8 +25,8 @@ class ScheduleDataService {
     return http.delete(`/schedules`);
   }
 
-  findByTitle(title) {
-    return http.get(`/schedules?title=${title}`);
+  findByName(name) {
+    return http.get(`/schedules?name=${name}`);
   }
 }
 

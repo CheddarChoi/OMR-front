@@ -3,9 +3,9 @@ import { Switch, Route, Link } from "react-router-dom";
 import { Navbar, Container } from "react-bootstrap";
 import "./App.scss";
 
-import ScheduleList from "./components/schedules-list.component";
-import AddSchedule from "./components/add-schedule.component";
-import Schedule from "./components/schedule.component";
+import ScheduleList from "./components/ListSchedule";
+import AddSchedule from "./components/AddSchedule";
+import Schedule from "./components/ScheduleDetail";
 
 import logo from "./Logo.png";
 
@@ -14,7 +14,7 @@ class App extends Component {
     return (
       <div>
         <Navbar as={Container} collapseOnSelect expand="lg">
-          <Navbar.Brand href="#home">
+          <Navbar.Brand href="/home">
             <img
               alt=""
               src={logo}
@@ -47,7 +47,11 @@ class App extends Component {
 
         <div className="container mt-3">
           <Switch>
-            <Route exact path={["/", "/schedules"]} component={ScheduleList} />
+            <Route
+              exact
+              path={["/", "/home", "/schedules"]}
+              component={ScheduleList}
+            />
             <Route exact path="/add" component={AddSchedule} />
             <Route path="/schedules/:id" component={Schedule} />
           </Switch>

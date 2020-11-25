@@ -5,7 +5,8 @@ export default class Schedule extends Component {
   constructor(props) {
     super(props);
     this.onChangeName = this.onChangeName.bind(this);
-    this.onChangeTime = this.onChangeTime.bind(this);
+    this.onChangeStartTime = this.onChangeStartTime.bind(this);
+    this.onChangeEndTime = this.onChangeEndTime.bind(this);
     this.getSchedule = this.getSchedule.bind(this);
     this.updatePublished = this.updatePublished.bind(this);
     this.updateSchedule = this.updateSchedule.bind(this);
@@ -15,7 +16,8 @@ export default class Schedule extends Component {
       currentSchedule: {
         id: null,
         name: "",
-        time: "",
+        startTime: "",
+        endTime: "",
         published: false,
       },
       message: "",
@@ -39,13 +41,24 @@ export default class Schedule extends Component {
     });
   }
 
-  onChangeTime(e) {
-    const time = e.target.value;
+  onChangeStartTime(e) {
+    const startTime = e.target.value;
 
     this.setState((prevState) => ({
       currentSchedule: {
         ...prevState.currentSchedule,
-        time: time,
+        startTime: startTime,
+      },
+    }));
+  }
+
+  onChangeEndTime(e) {
+    const endTime = e.target.value;
+
+    this.setState((prevState) => ({
+      currentSchedule: {
+        ...prevState.currentSchedule,
+        endTime: endTime,
       },
     }));
   }
@@ -68,7 +81,8 @@ export default class Schedule extends Component {
     var data = {
       id: this.state.currentSchedule.id,
       name: this.state.currentSchedule.name,
-      time: this.state.currentSchedule.time,
+      startTime: this.state.currentSchedule.startTime,
+      endTime: this.state.currentSchedule.endTime,
       published: status,
     };
 
@@ -126,7 +140,7 @@ export default class Schedule extends Component {
               <div className="form-group">
                 <label htmlFor="name">Name</label>
                 <input
-                  type="text"
+                  type="time"
                   className="form-control"
                   id="name"
                   value={currentSchedule.name}
@@ -134,13 +148,23 @@ export default class Schedule extends Component {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="time">Time</label>
+                <label htmlFor="startTime">Start Time</label>
                 <input
                   type="text"
                   className="form-control"
-                  id="time"
-                  value={currentSchedule.time}
-                  onChange={this.onChangeTime}
+                  id="startTime"
+                  value={currentSchedule.startTime}
+                  onChange={this.onChangeStartTime}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="endTime">End Time</label>
+                <input
+                  type="time"
+                  className="form-control"
+                  id="endTime"
+                  value={currentSchedule.endTime}
+                  onChange={this.onChangeEndTime}
                 />
               </div>
 

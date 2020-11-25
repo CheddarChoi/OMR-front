@@ -36,6 +36,7 @@ export default class ScheduleList extends Component {
     scheduleAPI
       .getAll()
       .then((response) => {
+        console.log(response.data);
         this.setState({
           schedules: response.data,
         });
@@ -150,9 +151,15 @@ export default class ScheduleList extends Component {
               </div>
               <div>
                 <label>
-                  <strong>Time:</strong>
+                  <strong>Start Time:</strong>
                 </label>{" "}
-                {currentSchedule.time}
+                {currentSchedule.startTime}
+              </div>
+              <div>
+                <label>
+                  <strong>End Time:</strong>
+                </label>{" "}
+                {currentSchedule.endTime}
               </div>
               <div>
                 <label>

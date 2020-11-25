@@ -5,14 +5,16 @@ export default class AddSchedule extends Component {
   constructor(props) {
     super(props);
     this.onChangeName = this.onChangeName.bind(this);
-    this.onChangeTime = this.onChangeTime.bind(this);
+    this.onChangeStartTime = this.onChangeStartTime.bind(this);
+    this.onChangeEndTime = this.onChangeEndTime.bind(this);
     this.saveSchedule = this.saveSchedule.bind(this);
     this.newSchedule = this.newSchedule.bind(this);
 
     this.state = {
       id: null,
       title: "",
-      time: "",
+      startTime: "",
+      endTime: "",
       published: false,
 
       submitted: false,
@@ -25,16 +27,23 @@ export default class AddSchedule extends Component {
     });
   }
 
-  onChangeTime(e) {
+  onChangeStartTime(e) {
     this.setState({
-      time: e.target.value,
+      startTime: e.target.value,
+    });
+  }
+
+  onChangeEndTime(e) {
+    this.setState({
+      endTime: e.target.value,
     });
   }
 
   saveSchedule() {
     var data = {
       name: this.state.name,
-      time: this.state.time,
+      startTime: this.state.startTime,
+      endTime: this.state.endTime,
     };
 
     scheduleAPI
@@ -43,7 +52,8 @@ export default class AddSchedule extends Component {
         this.setState({
           id: response.data.id,
           name: response.data.name,
-          time: response.data.time,
+          startTime: response.data.startTime,
+          endTime: response.data.endTime,
           published: response.data.published,
 
           submitted: true,
@@ -59,7 +69,8 @@ export default class AddSchedule extends Component {
     this.setState({
       id: null,
       name: "",
-      time: "",
+      startTime: "",
+      endTime: "",
       published: false,
 
       submitted: false,
@@ -92,15 +103,28 @@ export default class AddSchedule extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="time">Time</label>
+              <label htmlFor="startTime">Start Time</label>
               <input
-                type="text"
+                type="time"
                 className="form-control"
-                id="time"
+                id="startTime"
                 required
-                value={this.state.time}
-                onChange={this.onChangeTime}
-                name="time"
+                value={this.state.startTime}
+                onChange={this.onChangeStartTime}
+                name="startTime"
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="endTime">End Time</label>
+              <input
+                type="time"
+                className="form-control"
+                id="endTime"
+                required
+                value={this.state.endTime}
+                onChange={this.onChangeEndTime}
+                name="endTime"
               />
             </div>
 
