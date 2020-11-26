@@ -7,6 +7,7 @@ import ScheduleList from "./components/ListSchedule";
 import ScheduleChart from "./components/ScheduleChart";
 import AddSchedule from "./components/AddSchedule";
 import Schedule from "./components/ScheduleDetail";
+import Login from "./components/Login";
 
 import logo from "./Logo.png";
 
@@ -59,6 +60,7 @@ class App extends Component {
               component={ScheduleList}
             />
             <Route exact path="/chart" component={ScheduleChart} />
+            <Route exact path="/login" component={Login} />
             <Route exact path="/add" component={AddSchedule} />
             <Route path="/schedules/:id" component={Schedule} />
           </Switch>

@@ -1,6 +1,6 @@
 import http from "../http-common";
 
-class ScheduleDataService {
+class SchdeuleAPI {
   getAll() {
     return http.get("/schedules");
   }
@@ -30,4 +30,4 @@ class ScheduleDataService {
   }
 }
 
-export default new ScheduleDataService();
+export default new SchdeuleAPI();
