@@ -7,8 +7,8 @@ import * as loginAPI from "../api/loginAPI";
 import getServerSideProps from "../utils/checkAuth";
 export { getServerSideProps };
 
-const AdminLoginPage = () => {
-  const [email, setEmail] = useState("");
+const AdminLoginPage = ({ history }) => {
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [modal, setModal] = useState("");
@@ -19,9 +19,9 @@ const AdminLoginPage = () => {
     console.log("try login");
     e.preventDefault();
     loginAPI
-      .login({ email, password })
+      .login({ username, password })
       .then((res) => {
-        // router.push("/");
+        history.push("/");
         console.log("success!");
       })
       .catch((err) => {
@@ -61,10 +61,10 @@ const AdminLoginPage = () => {
           </Link>
           <Form className="login-form" onSubmit={tryLogin}>
             <Form.Group>
-              <Form.Label>Email</Form.Label>
+              <Form.Label>Username</Form.Label>
               <Form.Control
                 type="text"
-                onChange={(value) => setEmail(value.target.value)}
+                onChange={(value) => setUsername(value.target.value)}
               />
             </Form.Group>
 

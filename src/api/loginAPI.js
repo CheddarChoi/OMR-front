@@ -1,18 +1,22 @@
 import axios from "axios";
 
 const auth = axios.create({
-  baseURL: "http://localhost:8081/api/users",
+  baseURL: "http://localhost:8081/auth",
   withCredentials: true,
   headers: {
     "Content-type": "application/json",
   },
 });
 
-export const register = ({ name, email, password }) =>
-  auth.post(`/register`, { name, email, password }, { withCredentials: true });
+export const register = ({ name, username, password }) =>
+  auth.post(
+    `/register`,
+    { name, username, password },
+    { withCredentials: true }
+  );
 
-export const login = ({ email, password }) =>
-  auth.post(`/login`, { email, password });
+export const login = ({ username, password }) =>
+  auth.post(`/login`, { username, password });
 
 export const check = (options) => auth.get(`/check`, options);
 
