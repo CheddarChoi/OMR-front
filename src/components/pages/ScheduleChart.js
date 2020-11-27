@@ -1,6 +1,5 @@
 import React, { Component, useState, useEffect } from "react";
-import scheduleAPI from "../api/scheduleAPI";
-import { Link } from "react-router-dom";
+import scheduleAPI from "../../api/scheduleAPI";
 import { PieChart } from "react-minimal-pie-chart";
 
 const ScheduleChart = () => {

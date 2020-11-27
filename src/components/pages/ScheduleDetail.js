@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import scheduleAPI from "../api/scheduleAPI";
+import scheduleAPI from "../../api/scheduleAPI";
 
 export default class Schedule extends Component {
   constructor(props) {

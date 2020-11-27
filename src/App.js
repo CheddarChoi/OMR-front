@@ -3,11 +3,12 @@ import { Switch, Route, Link } from "react-router-dom";
 import { Navbar, Container } from "react-bootstrap";
 import "./App.scss";
 
-import ScheduleList from "./components/ListSchedule";
-import ScheduleChart from "./components/ScheduleChart";
-import AddSchedule from "./components/AddSchedule";
-import Schedule from "./components/ScheduleDetail";
-import Login from "./components/Login";
+import ScheduleList from "./components/pages/ListSchedule";
+import ScheduleChart from "./components/pages/ScheduleChart";
+import AddSchedule from "./components/pages/AddSchedule";
+import Schedule from "./components/pages/ScheduleDetail";
+import Login from "./components/pages/Login";
+import Register from "./components/pages/Register";
 
 import logo from "./Logo.png";
 
@@ -61,6 +62,7 @@ class App extends Component {
             />
             <Route exact path="/chart" component={ScheduleChart} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
             <Route exact path="/add" component={AddSchedule} />
             <Route path="/schedules/:id" component={Schedule} />
           </Switch>

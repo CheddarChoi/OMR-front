@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import scheduleAPI from "../api/scheduleAPI";
+import scheduleAPI from "../../api/scheduleAPI";
+import ColorPicker from "../organisms/ColorPicker";
 
 export default class AddSchedule extends Component {
   constructor(props) {
@@ -7,6 +8,7 @@ export default class AddSchedule extends Component {
     this.onChangeName = this.onChangeName.bind(this);
     this.onChangeStartTime = this.onChangeStartTime.bind(this);
     this.onChangeEndTime = this.onChangeEndTime.bind(this);
+    this.onChangeColor = this.onChangeColor.bind(this);
     this.saveSchedule = this.saveSchedule.bind(this);
     this.newSchedule = this.newSchedule.bind(this);
 
@@ -16,8 +18,13 @@ export default class AddSchedule extends Component {
       startTime: "",
       endTime: "",
       published: false,
-
       submitted: false,
+      color: {
+        r: "241",
+        g: "112",
+        b: "19",
+        a: "1",
+      },
     };
   }
 
@@ -38,6 +45,11 @@ export default class AddSchedule extends Component {
       endTime: e.target.value,
     });
   }
+
+  onChangeColor = (color) => {
+    console.log(color);
+    this.setState({ color: color.rgb });
+  };
 
   saveSchedule() {
     var data = {
@@ -101,7 +113,6 @@ export default class AddSchedule extends Component {
                 name="name"
               />
             </div>
-
             <div className="form-group">
               <label htmlFor="startTime">Start Time</label>
               <input
@@ -114,7 +125,6 @@ export default class AddSchedule extends Component {
                 name="startTime"
               />
             </div>
-
             <div className="form-group">
               <label htmlFor="endTime">End Time</label>
               <input
@@ -127,8 +137,13 @@ export default class AddSchedule extends Component {
                 name="endTime"
               />
             </div>
-
-            <button onClick={this.saveSchedule} className="btn btn-success">
+            <div>
+              <ColorPicker
+                color={this.state.color}
+                onChangeColor={this.onChangeColor}
+              />
+            </div>
+            <button onClick={this.saveSchedule} className="btn btn-primary">
               Submit
             </button>
           </div>

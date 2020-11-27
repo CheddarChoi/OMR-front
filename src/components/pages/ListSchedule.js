@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import scheduleAPI from "../api/scheduleAPI";
+import scheduleAPI from "../../api/scheduleAPI";
 import { Link } from "react-router-dom";
 
 export default class ScheduleList extends Component {

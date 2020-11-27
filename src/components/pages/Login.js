@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Form, Modal } from "react-bootstrap";
-import logo from "../Logo.png";
-import * as loginAPI from "../api/loginAPI";
+import logo from "../../Logo.png";
+import * as loginAPI from "../../api/loginAPI";
 
-import getServerSideProps from "../utils/checkAuth";
+import getServerSideProps from "../../utils/checkAuth";
 export { getServerSideProps };
 
 const AdminLoginPage = ({ history }) => {
