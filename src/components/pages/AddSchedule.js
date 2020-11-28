@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import scheduleAPI from "../../api/scheduleAPI";
-import ColorPicker from "../organisms/ColorPicker";
+import * as scheduleAPI from "../../api/scheduleAPI";
+import ScheduleForm from "../organisms/ScheduleForm";
 
 export default class AddSchedule extends Component {
   constructor(props) {
     super(props);
     this.onChangeName = this.onChangeName.bind(this);
+    this.onChangeShortName = this.onChangeShortName.bind(this);
     this.onChangeStartTime = this.onChangeStartTime.bind(this);
     this.onChangeEndTime = this.onChangeEndTime.bind(this);
     this.onChangeColor = this.onChangeColor.bind(this);
@@ -19,18 +20,20 @@ export default class AddSchedule extends Component {
       endTime: "",
       published: false,
       submitted: false,
-      color: {
-        r: "241",
-        g: "112",
-        b: "19",
-        a: "1",
-      },
+      color: "#000000",
+      shortName: "",
     };
   }
 
   onChangeName(e) {
     this.setState({
       name: e.target.value,
+    });
+  }
+
+  onChangeShortName(e) {
+    this.setState({
+      shortName: e.target.value,
     });
   }
 
@@ -47,16 +50,21 @@ export default class AddSchedule extends Component {
   }
 
   onChangeColor = (color) => {
-    console.log(color);
-    this.setState({ color: color.rgb });
+    console.log(color.hex);
+    this.setState({ color: color.hex });
   };
 
   saveSchedule() {
+    console.log(this.state.color.hex);
     var data = {
       name: this.state.name,
+      shortName: this.state.shortName,
       startTime: this.state.startTime,
       endTime: this.state.endTime,
+      color: this.state.color,
     };
+
+    console.log(data);
 
     scheduleAPI
       .create(data)
@@ -64,10 +72,11 @@ export default class AddSchedule extends Component {
         this.setState({
           id: response.data.id,
           name: response.data.name,
+          shortName: response.data.shortName,
           startTime: response.data.startTime,
           endTime: response.data.endTime,
+          color: response.data.color,
           published: response.data.published,
-
           submitted: true,
         });
         console.log(response.data);
@@ -100,53 +109,19 @@ export default class AddSchedule extends Component {
             </button>
           </div>
         ) : (
-          <div>
-            <div className="form-group">
-              <label htmlFor="name">Name</label>
-              <input
-                type="text"
-                className="form-control"
-                id="name"
-                required
-                value={this.state.name}
-                onChange={this.onChangeName}
-                name="name"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="startTime">Start Time</label>
-              <input
-                type="time"
-                className="form-control"
-                id="startTime"
-                required
-                value={this.state.startTime}
-                onChange={this.onChangeStartTime}
-                name="startTime"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="endTime">End Time</label>
-              <input
-                type="time"
-                className="form-control"
-                id="endTime"
-                required
-                value={this.state.endTime}
-                onChange={this.onChangeEndTime}
-                name="endTime"
-              />
-            </div>
-            <div>
-              <ColorPicker
-                color={this.state.color}
-                onChangeColor={this.onChangeColor}
-              />
-            </div>
-            <button onClick={this.saveSchedule} className="btn btn-primary">
-              Submit
-            </button>
-          </div>
+          <ScheduleForm
+            name={this.state.name}
+            onChangeName={this.onChangeName}
+            shortName={this.state.shortName}
+            onChangeShortName={this.onChangeShortName}
+            startTime={this.state.startTime}
+            onChangeStartTime={this.onChangeStartTime}
+            endTime={this.state.endTime}
+            onChangeEndTime={this.onChangeEndTime}
+            color={this.state.color}
+            onChangeColor={this.onChangeColor}
+            saveSchedule={this.saveSchedule}
+          />
         )}
       </div>
     );

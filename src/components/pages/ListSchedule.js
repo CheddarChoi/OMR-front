@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import scheduleAPI from "../../api/scheduleAPI";
+import * as scheduleAPI from "../../api/scheduleAPI";
 import { Link } from "react-router-dom";
 
 export default class ScheduleList extends Component {
@@ -40,7 +40,6 @@ export default class ScheduleList extends Component {
         this.setState({
           schedules: response.data,
         });
-        console.log(response.data);
       })
       .catch((e) => {
         console.log(e);

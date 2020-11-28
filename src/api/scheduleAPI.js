@@ -1,33 +1,23 @@
-import http from "../http-common";
+import axios from "axios";
 
-class SchdeuleAPI {
-  getAll() {
-    return http.get("/schedule");
-  }
+const schedule = axios.create({
+  baseURL: "http://localhost:8081/schedule",
+  withCredentials: true,
+  headers: {
+    "Content-type": "application/json",
+  },
+});
 
-  get(id) {
-    return http.get(`/schedule/${id}`);
-  }
+export const getAll = () => schedule.get("");
 
-  create(data) {
-    return http.post("/schedule", data);
-  }
+export const get = (id) => schedule.get(`/${id}`);
 
-  update(id, data) {
-    return http.put(`/schedule/${id}`, data);
-  }
+export const create = (data) => schedule.post("", data);
 
-  delete(id) {
-    return http.delete(`/schedule/${id}`);
-  }
+export const update = (id, data) => schedule.put(`/${id}`, data);
 
-  deleteAll() {
-    return http.delete(`/schedule`);
-  }
+export const deleteOne = (id) => schedule.delete(`/${id}`);
 
-  findByName(name) {
-    return http.get(`/schedule?name=${name}`);
-  }
-}
+export const deleteAll = () => schedule.delete(``);
 
-export default new SchdeuleAPI();
+export const findByName = (name) => schedule.get(`?name=${name}`);

@@ -23,8 +23,7 @@ export default class ColorPicker extends Component {
 
     return (
       <div>
-        <div className="mb-2">Label Color</div>
-        <div className="mb-4">
+        <div>
           <div
             style={{
               padding: "5px",
@@ -39,9 +38,9 @@ export default class ColorPicker extends Component {
             <div
               style={{
                 width: "36px",
-                height: "14px",
+                height: "18px",
                 borderRadius: "2px",
-                background: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+                background: `${color}`,
               }}
             />
           </div>

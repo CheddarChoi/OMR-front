@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import scheduleAPI from "../../api/scheduleAPI";
+import * as scheduleAPI from "../../api/scheduleAPI";
 
 export default class Schedule extends Component {
   constructor(props) {
@@ -118,7 +118,7 @@ export default class Schedule extends Component {
 
   deleteSchedule() {
     scheduleAPI
-      .delete(this.state.currentSchedule.id)
+      .deleteOne(this.state.currentSchedule.id)
       .then((response) => {
         console.log(response.data);
         this.props.history.push("/schedules");
