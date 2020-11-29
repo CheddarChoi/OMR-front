@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import * as scheduleAPI from "../../api/scheduleAPI";
 import { Link } from "react-router-dom";
+import { time2dec } from "../../utils/time";
+import Header from "../organisms/Header";
 
 export default class ScheduleList extends Component {
   constructor(props) {
@@ -91,95 +93,98 @@ export default class ScheduleList extends Component {
     const { searchName, schedules, currentSchedule, currentIndex } = this.state;
 
     return (
-      <div className="list row">
-        <div className="col-md-8">
-          <div className="input-group mb-3">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Search by Name"
-              value={searchName}
-              onChange={this.onChangeSearchName}
-            />
-            <div className="input-group-append">
+      <div>
+        <Header />
+        <div className="container">
+          <div className="list row">
+            <div className="col-md-8">
+              <div className="input-group mb-3">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Search by Name"
+                  value={searchName}
+                  onChange={this.onChangeSearchName}
+                />
+                <div className="input-group-append">
+                  <button
+                    className="btn btn-outline-secondary"
+                    type="button"
+                    onClick={this.searchName}
+                  >
+                    Search
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="col-md-6">
+              <h4>Schedules List</h4>
+
+              <ul className="list-group">
+                {schedules &&
+                  schedules
+                    .sort(
+                      (a, b) => time2dec(a.startTime) - time2dec(b.startTime)
+                    )
+                    .map((schedule, index) => (
+                      <li
+                        className={
+                          "list-group-item " +
+                          (index === currentIndex ? "active" : "")
+                        }
+                        onClick={() => this.setActiveSchedule(schedule, index)}
+                        key={index}
+                      >
+                        {schedule.name}
+                      </li>
+                    ))}
+              </ul>
+
               <button
-                className="btn btn-outline-secondary"
-                type="button"
-                onClick={this.searchName}
+                className="m-3 btn btn-sm btn-danger"
+                onClick={this.removeAllSchedule}
               >
-                Search
+                Remove All
               </button>
             </div>
+            <div className="col-md-6">
+              {currentSchedule ? (
+                <div>
+                  <h4>Schedule</h4>
+                  <div>
+                    <label>
+                      <strong>Name:</strong>
+                    </label>{" "}
+                    {currentSchedule.name}
+                  </div>
+                  <div>
+                    <label>
+                      <strong>Start Time:</strong>
+                    </label>{" "}
+                    {currentSchedule.startTime}
+                  </div>
+                  <div>
+                    <label>
+                      <strong>End Time:</strong>
+                    </label>{" "}
+                    {currentSchedule.endTime}
+                  </div>
+
+                  <Link
+                    to={"/schedules/" + currentSchedule.id}
+                    className="badge badge-warning"
+                  >
+                    Edit
+                  </Link>
+                </div>
+              ) : (
+                <div>
+                  <br />
+                  <p>Please click on a Schedule...</p>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-        <div className="col-md-6">
-          <h4>Schedules List</h4>
-
-          <ul className="list-group">
-            {schedules &&
-              schedules.map((schedule, index) => (
-                <li
-                  className={
-                    "list-group-item " +
-                    (index === currentIndex ? "active" : "")
-                  }
-                  onClick={() => this.setActiveSchedule(schedule, index)}
-                  key={index}
-                >
-                  {schedule.name}
-                </li>
-              ))}
-          </ul>
-
-          <button
-            className="m-3 btn btn-sm btn-danger"
-            onClick={this.removeAllSchedule}
-          >
-            Remove All
-          </button>
-        </div>
-        <div className="col-md-6">
-          {currentSchedule ? (
-            <div>
-              <h4>Schedule</h4>
-              <div>
-                <label>
-                  <strong>Name:</strong>
-                </label>{" "}
-                {currentSchedule.name}
-              </div>
-              <div>
-                <label>
-                  <strong>Start Time:</strong>
-                </label>{" "}
-                {currentSchedule.startTime}
-              </div>
-              <div>
-                <label>
-                  <strong>End Time:</strong>
-                </label>{" "}
-                {currentSchedule.endTime}
-              </div>
-              <div>
-                <label>
-                  <strong>Status:</strong>
-                </label>{" "}
-                {currentSchedule.published ? "Published" : "Pending"}
-              </div>
-
-              <Link
-                to={"/schedules/" + currentSchedule.id}
-                className="badge badge-warning"
-              >
-                Edit
-              </Link>
-            </div>
-          ) : (
-            <div>
-              <br />
-              <p>Please click on a Schedule...</p>
-            </div>
-          )}
         </div>
       </div>
     );

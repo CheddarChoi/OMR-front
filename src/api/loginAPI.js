@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const auth = axios.create({
-  baseURL: "http://localhost:8081/auth",
+  baseURL: process.env.REACT_APP_BASEURL + "/auth",
   withCredentials: true,
   headers: {
     "Content-type": "application/json",
@@ -18,6 +18,6 @@ export const register = ({ name, username, password }) =>
 export const login = ({ username, password }) =>
   auth.post(`/login`, { username, password });
 
-export const check = (options) => auth.get(`/check`, options);
+export const check = () => auth.get(`/check`);
 
 export const logout = () => auth.get(`/logout`);

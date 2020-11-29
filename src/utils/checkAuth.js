@@ -3,32 +3,14 @@ import { check } from "../api/loginAPI";
 const props = { props: {} };
 
 export default async function getServerSideProps(ctx) {
-  const cookie = ctx.req.headers.cookie;
-  const isAuthRoute =
-    ["/home", "/login", "/register"].indexOf(ctx.resolvedUrl) === -1;
-
   try {
-    const { data } = await check({ headers: { cookie } });
-    return isAuthRoute
-      ? {
-          props: { name: data.name },
-        }
-      : {
-          redirect: {
-            destination: "/",
-            permanent: false,
-          },
-          props: { name: data.name },
-        };
+    const { data } = await check();
+    console.log(data);
+    return {
+      props: { name: data.name },
+    };
   } catch (err) {
     console.log(err);
-    return isAuthRoute
-      ? {
-          redirect: {
-            destination: "/home",
-            permanent: false,
-          },
-        }
-      : props;
+    return props;
   }
 }

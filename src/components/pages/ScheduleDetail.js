@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import * as scheduleAPI from "../../api/scheduleAPI";
+import Header from "../organisms/Header";
 
 export default class Schedule extends Component {
   constructor(props) {
@@ -8,7 +9,6 @@ export default class Schedule extends Component {
     this.onChangeStartTime = this.onChangeStartTime.bind(this);
     this.onChangeEndTime = this.onChangeEndTime.bind(this);
     this.getSchedule = this.getSchedule.bind(this);
-    this.updatePublished = this.updatePublished.bind(this);
     this.updateSchedule = this.updateSchedule.bind(this);
     this.deleteSchedule = this.deleteSchedule.bind(this);
 
@@ -18,7 +18,6 @@ export default class Schedule extends Component {
         name: "",
         startTime: "",
         endTime: "",
-        published: false,
       },
       message: "",
     };
@@ -26,6 +25,7 @@ export default class Schedule extends Component {
 
   componentDidMount() {
     this.getSchedule(this.props.match.params.id);
+    console.log(this.props.match.params.id);
   }
 
   onChangeName(e) {
@@ -77,31 +77,6 @@ export default class Schedule extends Component {
       });
   }
 
-  updatePublished(status) {
-    var data = {
-      id: this.state.currentSchedule.id,
-      name: this.state.currentSchedule.name,
-      startTime: this.state.currentSchedule.startTime,
-      endTime: this.state.currentSchedule.endTime,
-      published: status,
-    };
-
-    scheduleAPI
-      .update(this.state.currentSchedule.id, data)
-      .then((response) => {
-        this.setState((prevState) => ({
-          currentSchedule: {
-            ...prevState.currentSchedule,
-            published: status,
-          },
-        }));
-        console.log(response.data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }
-
   updateSchedule() {
     scheduleAPI
       .update(this.state.currentSchedule.id, this.state.currentSchedule)
@@ -133,6 +108,7 @@ export default class Schedule extends Component {
 
     return (
       <div>
+        <Header />
         {currentSchedule ? (
           <div className="edit-form">
             <h4>Schedule</h4>
@@ -140,7 +116,7 @@ export default class Schedule extends Component {
               <div className="form-group">
                 <label htmlFor="name">Name</label>
                 <input
-                  type="time"
+                  type="text"
                   className="form-control"
                   id="name"
                   value={currentSchedule.name}
@@ -150,7 +126,7 @@ export default class Schedule extends Component {
               <div className="form-group">
                 <label htmlFor="startTime">Start Time</label>
                 <input
-                  type="text"
+                  type="time"
                   className="form-control"
                   id="startTime"
                   value={currentSchedule.startTime}
@@ -167,30 +143,7 @@ export default class Schedule extends Component {
                   onChange={this.onChangeEndTime}
                 />
               </div>
-
-              <div className="form-group">
-                <label>
-                  <strong>Status:</strong>
-                </label>
-                {currentSchedule.published ? "Published" : "Pending"}
-              </div>
             </form>
-
-            {currentSchedule.published ? (
-              <button
-                className="badge badge-primary mr-2"
-                onClick={() => this.updatePublished(false)}
-              >
-                UnPublish
-              </button>
-            ) : (
-              <button
-                className="badge badge-primary mr-2"
-                onClick={() => this.updatePublished(true)}
-              >
-                Publish
-              </button>
-            )}
 
             <button
               className="badge badge-danger mr-2"

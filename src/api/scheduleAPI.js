@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const schedule = axios.create({
-  baseURL: "http://localhost:8081/schedule",
+  baseURL: process.env.REACT_APP_BASEURL + "/schedule",
   withCredentials: true,
   headers: {
     "Content-type": "application/json",

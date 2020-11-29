@@ -1,6 +1,8 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import * as scheduleAPI from "../../api/scheduleAPI";
 import { PieChart } from "react-minimal-pie-chart";
+import { time2dec } from "../../utils/time";
+import Header from "../organisms/Header";
 
 const ScheduleChart = () => {
   // const router = useRouter();
@@ -8,23 +10,6 @@ const ScheduleChart = () => {
   const [chartData, setChartData] = useState([]);
 
   const colors = ["#563E2E", "#D77C37", "#FCECBA", "#88C5AF", "#E9A345"];
-
-  function hm2dec(hoursMinutes) {
-    var hours = parseInt(hoursMinutes[0], 10);
-    var minutes = hoursMinutes[1] ? parseInt(hoursMinutes[1], 10) : 0;
-    return (hours + minutes / 60).toFixed(2);
-  }
-
-  function time2dec(tIn) {
-    if (tIn == "") return 0;
-    if (tIn.indexOf("h") >= 0 || tIn.indexOf(":") >= 0)
-      return hm2dec(tIn.split(/[h:]/));
-    if (tIn.indexOf("m") >= 0) return hm2dec([0, tIn.replace("m", "")]);
-    if (tIn.indexOf(",") >= 0)
-      return parseFloat(tIn.split(",").join(".")).toFixed(2);
-    if (tIn.indexOf(".") >= 0) return parseFloat(tIn);
-    return parseInt(tIn, 10);
-  }
 
   useEffect(() => {
     scheduleAPI
@@ -71,81 +56,13 @@ const ScheduleChart = () => {
   }, [schedules]);
 
   return (
-    <div className="w-50">
-      <PieChart startAngle={270} totalValue={24} data={chartData} />
+    <div>
+      <Header />
+      <div className="w-50">
+        <PieChart startAngle={270} totalValue={24} data={chartData} />
+      </div>
     </div>
   );
 };
 
 export default ScheduleChart;
-
-// export default class ScheduleList extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.retrieveSchedule = this.retrieveSchedule.bind(this);
-//     this.refreshList = this.refreshList.bind(this);
-//     this.changeToPieChartData = this.changeToPieChartData.bind(this);
-
-//     this.state = {
-//       schedules: [],
-//       chartData: [],
-//       currentSchedule: null,
-//       currentIndex: -1,
-//       searchName: "",
-//     };
-//   }
-
-//   componentDidMount() {
-//     this.retrieveSchedule();
-//   }
-
-//   retrieveSchedule() {
-//     scheduleAPI
-//       .getAll()
-//       .then((response) => {
-//         this.setState({
-//           schedules: response.data,
-//         });
-//       })
-//       .catch((e) => {
-//         console.log(e);
-//       })
-//       .then(this.changeToPieChartData());
-//   }
-
-//   refreshList() {
-//     this.retrieveSchedule();
-//     this.setState({
-//       currentSchedule: null,
-//       currentIndex: -1,
-//     });
-//   }
-
-//   changeToPieChartData() {
-//     console.log(this.schedules);
-//     let currTime = 0;
-//     if (this.schedules) {
-//       this.schedules.map((schedule) => {
-//         console.log(schedule);
-//       });
-//     }
-//   }
-
-//   render() {
-//     const { schedules } = this.state;
-
-//     return (
-//       <div className="w-50">
-//         <PieChart
-//           startAngle={270}
-//           totalValue={24}
-//           data={[
-//             { title: "One", value: 10, color: "#E38627" },
-//             { title: "Two", value: 5, color: "#C13C37" },
-//             { title: "Three", value: 9, color: "#6A2135" },
-//           ]}
-//         />
-//       </div>
-//     );
-//   }
-// }
