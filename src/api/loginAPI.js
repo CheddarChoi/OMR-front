@@ -21,3 +21,9 @@ export const login = ({ username, password }) =>
 export const check = () => auth.get(`/check`);
 
 export const logout = () => auth.get(`/logout`);
+
+export const changePublic = () => auth.post(`/changePublic`);
+
+export const changePrivate = () => auth.post(`/changePrivate`);
+
+export const getPublicity = () => auth.get(`/publicity`);

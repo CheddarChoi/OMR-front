@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import * as scheduleAPI from "../../api/scheduleAPI";
 import { Link } from "react-router-dom";
-import { time2dec } from "../../utils/time";
+import { time2dec, time2hm } from "../../utils/time";
 import Header from "../organisms/Header";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 export default class ScheduleList extends Component {
   constructor(props) {
@@ -13,6 +15,7 @@ export default class ScheduleList extends Component {
     this.setActiveSchedule = this.setActiveSchedule.bind(this);
     this.removeAllSchedule = this.removeAllSchedule.bind(this);
     this.searchName = this.searchName.bind(this);
+    this.isDark = this.isDark.bind(this);
 
     this.state = {
       schedules: [],
@@ -20,6 +23,14 @@ export default class ScheduleList extends Component {
       currentIndex: -1,
       searchName: "",
     };
+  }
+
+  isDark(colorCode) {
+    const red = parseInt(colorCode.slice(1, 3), 16);
+    const green = parseInt(colorCode.slice(3, 5), 16);
+    const blue = parseInt(colorCode.slice(5, 7), 16);
+    console.log(red * 0.299 + green * 0.587 + blue * 0.114);
+    if (red * 0.299 + green * 0.587 + blue * 0.114 < 186) return true;
   }
 
   componentDidMount() {
@@ -75,6 +86,18 @@ export default class ScheduleList extends Component {
       });
   }
 
+  deleteSchedule(id) {
+    scheduleAPI
+      .deleteOne(id)
+      .then((response) => {
+        console.log(response.data);
+        this.props.history.push("/schedules");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+
   searchName() {
     scheduleAPI
       .findByName(this.state.searchName)
@@ -96,30 +119,31 @@ export default class ScheduleList extends Component {
       <div>
         <Header />
         <div className="container">
-          <div className="list row">
-            <div className="col-md-8">
-              <div className="input-group mb-3">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Search by Name"
-                  value={searchName}
-                  onChange={this.onChangeSearchName}
-                />
-                <div className="input-group-append">
-                  <button
-                    className="btn btn-outline-secondary"
-                    type="button"
-                    onClick={this.searchName}
-                  >
-                    Search
-                  </button>
-                </div>
+          <div className="title-text mt-5">Edit Schedule</div>
+          <div className="small-text mb-2">Search and Edit your schedules.</div>
+          <hr />
+          <div>
+            <div className="input-group mb-3">
+              <input
+                type="text"
+                className="form-control subtitle-text"
+                placeholder="Search by Name"
+                value={searchName}
+                onChange={this.onChangeSearchName}
+              />
+              <div className="input-group-append">
+                <button
+                  className="btn btn-outline-primary subtitle-text"
+                  type="button"
+                  onClick={this.searchName}
+                >
+                  Search
+                </button>
               </div>
             </div>
-            <div className="col-md-6">
-              <h4>Schedules List</h4>
-
+          </div>
+          <div className="row">
+            <div className="col-5">
               <ul className="list-group">
                 {schedules &&
                   schedules
@@ -128,59 +152,76 @@ export default class ScheduleList extends Component {
                     )
                     .map((schedule, index) => (
                       <li
-                        className={
-                          "list-group-item " +
-                          (index === currentIndex ? "active" : "")
-                        }
+                        className={"list-group-item"}
+                        style={{
+                          backgroundColor:
+                            index === currentIndex
+                              ? `${currentSchedule.color}`
+                              : "#ffffff",
+                          color:
+                            index === currentIndex &&
+                            this.isDark(currentSchedule.color)
+                              ? "#ffffff"
+                              : "#000000",
+                        }}
                         onClick={() => this.setActiveSchedule(schedule, index)}
                         key={index}
                       >
-                        {schedule.name}
+                        <div className="small-text">
+                          {time2hm(schedule.startTime)} -{" "}
+                          {time2hm(schedule.endTime)}{" "}
+                        </div>
+                        <div className="subtitle-text">{schedule.name}</div>
                       </li>
                     ))}
               </ul>
 
               <button
-                className="m-3 btn btn-sm btn-danger"
+                className="mt-3 btn btn-sm btn-danger"
                 onClick={this.removeAllSchedule}
               >
                 Remove All
               </button>
             </div>
-            <div className="col-md-6">
+            <div className="col-7">
               {currentSchedule ? (
                 <div>
-                  <h4>Schedule</h4>
-                  <div>
-                    <label>
-                      <strong>Name:</strong>
-                    </label>{" "}
-                    {currentSchedule.name}
-                  </div>
-                  <div>
+                  <div className="subtitle-text">{currentSchedule.name}</div>
+                  <hr className="my-1" />
+                  <div className="mt-2 body-text">
                     <label>
                       <strong>Start Time:</strong>
                     </label>{" "}
                     {currentSchedule.startTime}
                   </div>
-                  <div>
+                  <div className="body-text">
                     <label>
                       <strong>End Time:</strong>
                     </label>{" "}
                     {currentSchedule.endTime}
                   </div>
-
-                  <Link
-                    to={"/schedules/" + currentSchedule.id}
-                    className="badge badge-warning"
-                  >
-                    Edit
+                  <div className="body-text">
+                    <label>
+                      <strong>Label:</strong>
+                    </label>{" "}
+                    {currentSchedule.shortName}
+                  </div>
+                  <Link to={"/schedules/" + currentSchedule.id}>
+                    <EditIcon />
                   </Link>
+                  <button
+                    className="btn"
+                    style={{ color: "#563E2E" }}
+                    onClick={() => this.deleteSchedule(currentSchedule.id)}
+                  >
+                    <DeleteIcon />
+                  </button>
                 </div>
               ) : (
                 <div>
-                  <br />
-                  <p>Please click on a Schedule...</p>
+                  <div className="subtitle-text">
+                    Click on a Schedule to see the detail.
+                  </div>
                 </div>
               )}
             </div>

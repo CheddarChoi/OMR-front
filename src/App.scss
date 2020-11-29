@@ -138,6 +138,14 @@ body {
   font-family: NanumSquare;
   font-style: normal;
   font-weight: normal;
+  font-size: 15px;
+  line-height: 140%;
+}
+
+.small-text {
+  font-family: NanumSquare;
+  font-style: normal;
+  font-weight: normal;
   font-size: 12px;
   line-height: 140%;
 }
@@ -152,6 +160,10 @@ input.body-text {
   font-weight: 600;
   font-size: 18px;
   line-height: 140%;
+}
+
+button.btn-outline-primary :hover {
+  color: white;
 }
 
 @import "~bootstrap/scss/bootstrap.scss";

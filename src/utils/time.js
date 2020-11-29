@@ -14,3 +14,10 @@ export function time2dec(tIn) {
   if (tIn.indexOf(".") >= 0) return parseFloat(tIn);
   return parseInt(tIn, 10);
 }
+
+export function time2hm(tIn) {
+  const times = tIn.split(":");
+  const hour = times[0];
+  const min = times[1];
+  return hour + ":" + min;
+}
