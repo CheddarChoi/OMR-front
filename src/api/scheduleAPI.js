@@ -12,6 +12,8 @@ export const getAll = () => schedule.get("");
 
 export const get = (id) => schedule.get(`/${id}`);
 
+export const getByUser = (userid) => schedule.get(`/getByUser/${userid}`);
+
 export const create = (data) => schedule.post("", data);
 
 export const update = (id, data) => schedule.put(`/${id}`, data);

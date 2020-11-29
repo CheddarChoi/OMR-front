@@ -27,3 +27,5 @@ export const changePublic = () => auth.post(`/changePublic`);
 export const changePrivate = () => auth.post(`/changePrivate`);
 
 export const getPublicity = () => auth.get(`/publicity`);
+
+export const getAllPublicUsers = () => auth.get(`/allPublicUser`);

@@ -9,6 +9,7 @@ import AddSchedule from "./components/pages/AddSchedule";
 import Schedule from "./components/pages/ScheduleDetail";
 import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
+import ShareRoutine from "./components/pages/ShareRoutine";
 import ScheduleTimetable from "./components/organisms/ScheduleTimetable";
 
 const App = () => {
@@ -24,6 +25,7 @@ const App = () => {
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/add" component={AddSchedule} />
+        <Route exact path="/share" component={ShareRoutine} />
         <Route exact path="/timetable" component={ScheduleTimetable} />
         <Route path="/schedules/:id" component={Schedule} />
       </Switch>

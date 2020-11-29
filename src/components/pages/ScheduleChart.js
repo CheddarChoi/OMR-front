@@ -36,7 +36,6 @@ const ScheduleChart = () => {
   }, []);
 
   useEffect(() => {
-    let index = 0;
     let chartData = [];
     let currTime = 0;
     let time = 0;
@@ -45,7 +44,6 @@ const ScheduleChart = () => {
       schedules
         .sort((a, b) => time2dec(a.startTime) - time2dec(b.startTime))
         .map((schedule) => {
-          index += 1;
           time = time2dec(schedule.startTime);
           console.log(time2dec(schedule.startTime));
           if (currTime !== time) {
