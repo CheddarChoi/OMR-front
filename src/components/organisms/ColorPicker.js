@@ -32,13 +32,14 @@ export default class ColorPicker extends Component {
               boxShadow: "0 0 0 1px rgba(0,0,0,.1)",
               display: "inline-block",
               cursor: "pointer",
+              marginRight: "0.5rem",
             }}
             onClick={this.handleClick}
           >
             <div
               style={{
-                width: "36px",
-                height: "18px",
+                width: "24px",
+                height: "24px",
                 borderRadius: "2px",
                 background: `${color}`,
               }}

@@ -8,15 +8,7 @@ const ScheduleTimetable = () => {
   // const router = useRouter();
   const [schedules, setSchedules] = useState([]);
   const [events, setEvents] = useState({
-    Routine: [
-      {
-        id: 1,
-        name: "Custom Event 1",
-        type: "custom-hello",
-        startTime: moment("2018-02-23T11:30:00"),
-        endTime: moment("2018-02-23T13:30:00"),
-      },
-    ],
+    Routine: [],
   });
 
   useEffect(() => {
@@ -32,7 +24,6 @@ const ScheduleTimetable = () => {
   }, []);
 
   useEffect(() => {
-    console.log(moment("2018-02-23T11:30:00"));
     const newEvents = { Routine: [] };
     let index = 1;
     schedules
@@ -43,8 +34,8 @@ const ScheduleTimetable = () => {
           id: schedule.id,
           name: schedule.name,
           type: "custom",
-          startTime: moment("2018-02-23T" + schedule.startTime),
-          endTime: moment("2018-02-23T" + schedule.endTime),
+          startTime: moment(schedule.startTime, "HH:mm:ss"),
+          endTime: moment(schedule.endTime, "HH:mm:ss"),
         };
         newEvents.Routine.push(newEvent);
         index = index + 1;

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Modal, Button } from "react-bootstrap";
 import * as scheduleAPI from "../../api/scheduleAPI";
 import ScheduleForm from "../organisms/ScheduleForm";
 import Header from "../organisms/Header";
@@ -23,6 +24,8 @@ export default class AddSchedule extends Component {
       submitted: false,
       color: "#563e2e",
       shortName: "",
+      showModal: false,
+      modal: "",
     };
   }
 
@@ -55,8 +58,16 @@ export default class AddSchedule extends Component {
     this.setState({ color: color.hex });
   };
 
+  handleClose = () => {
+    this.setState({ showModal: false });
+  };
+
   saveSchedule() {
-    console.log(this.state.color.hex);
+    if (!this.state.name && !/^\s+$/.test(this.state.name)) return;
+    if (!this.state.startTime) return;
+    if (!this.state.endTime) return;
+    if (!this.state.shortName && !/^\s+$/.test(this.state.shortName)) return;
+
     var data = {
       name: this.state.name,
       shortName: this.state.shortName,
@@ -82,6 +93,9 @@ export default class AddSchedule extends Component {
         console.log(response.data);
       })
       .catch((e) => {
+        if (e.response.status === 400) {
+          this.setState({ showModal: true, modal: e.response.data });
+        }
         console.log(e);
       });
   }
@@ -100,6 +114,14 @@ export default class AddSchedule extends Component {
     return (
       <div>
         <Header />
+        <Modal centered show={this.state.showModal} onHide={this.handleClose}>
+          <Modal.Body className="subtitle-text">{this.state.modal}</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={this.handleClose}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
         <div className="container">
           <div className="title-text mt-5">Add New Schedule</div>
           <div className="body-text mb-2">

@@ -19,13 +19,13 @@ export default class AddSchedule extends Component {
 
     return (
       <div>
-        <div className="form-group">
+        <form className="form-group">
           <label className="subtitle-text" htmlFor="name">
             Name
           </label>
           <input
             type="text"
-            className="form-control body-text"
+            className="form-control body-text mb-3"
             id="name"
             required
             value={name}
@@ -33,52 +33,54 @@ export default class AddSchedule extends Component {
             name="name"
             placeholder="Enter the name of the schedule"
           />
-        </div>
-        <div className="form-group">
           <label className="subtitle-text" htmlFor="startTime">
             Start Time
           </label>
           <input
             type="time"
-            className="form-control body-text"
+            className="form-control body-text mb-3"
             id="startTime"
             required
             value={startTime}
             onChange={onChangeStartTime}
             name="startTime"
           />
-        </div>
-        <div className="form-group">
           <label className="subtitle-text" htmlFor="endTime">
             End Time
           </label>
           <input
             type="time"
-            className="form-control body-text"
+            className="form-control body-text mb-3"
             id="endTime"
             required
             value={endTime}
             onChange={onChangeEndTime}
             name="endTime"
           />
-        </div>
-        <div>
           <label className="subtitle-text">Label</label>
-          <ColorPicker color={color} onChangeColor={onChangeColor} />
-          <input
-            type="text"
-            className="form-control body-text"
-            id="shortName"
-            required
-            value={shortName}
-            onChange={onChangeShortName}
-            name="shortName"
-            placeholder="Enter short name of schedule"
-          />
-        </div>
-        <button onClick={saveSchedule} className="btn btn-primary mt-4">
-          Submit
-        </button>
+          <div className="d-flex">
+            <ColorPicker color={color} onChangeColor={onChangeColor} />
+            <input
+              type="text"
+              className="form-control body-text mb-3"
+              id="shortName"
+              required
+              maxlength="10"
+              size="10"
+              value={shortName}
+              onChange={onChangeShortName}
+              name="shortName"
+              placeholder="Enter short name of schedule"
+            />
+          </div>
+          <button
+            type="submit"
+            onClick={saveSchedule}
+            className="btn btn-primary mt-4"
+          >
+            Submit
+          </button>
+        </form>
       </div>
     );
   }
