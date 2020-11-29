@@ -163,7 +163,7 @@ input.body-text {
 }
 
 button.btn-outline-primary :hover {
-  color: white;
+  color: white !important;
 }
 
 @import "~bootstrap/scss/bootstrap.scss";

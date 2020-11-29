@@ -49,28 +49,30 @@ const AdminLoginPage = ({ history }) => {
       <div className="d-flex login-content">
         <div className="flex-grow-1 login-module d-flex flex-column">
           <Link to={"/home"}>
-            <a className="align-self-center login-logo">
+            <a className="d-flex justify-content-center">
               <img
                 alt=""
                 src={logo}
                 width="auto"
                 height="40"
-                className="d-inline-block align-top"
+                className="d-inline-block align-top mb-3 align-center"
               />
             </a>
           </Link>
           <Form className="login-form" onSubmit={tryLogin}>
             <Form.Group>
-              <Form.Label>Username</Form.Label>
+              <Form.Label className="body-text">Username</Form.Label>
               <Form.Control
+                className="body-text"
                 type="text"
                 onChange={(value) => setUsername(value.target.value)}
               />
             </Form.Group>
 
             <Form.Group>
-              <Form.Label>Password</Form.Label>
+              <Form.Label className="body-text">Password</Form.Label>
               <Form.Control
+                className="body-text"
                 type="password"
                 onChange={(value) => setPassword(value.target.value)}
               />
@@ -79,7 +81,7 @@ const AdminLoginPage = ({ history }) => {
               Login
             </Button>
             <Form.Text className="text-muted">
-              New to Studyo? <Link to={"/register"}>Register</Link>
+              New to OMR? <Link to={"/register"}>Register</Link>
             </Form.Text>
           </Form>
         </div>
