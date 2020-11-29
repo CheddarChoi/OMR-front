@@ -125,7 +125,7 @@ export default class AddSchedule extends Component {
         <div className="container">
           <div className="title-text mt-5">Add New Schedule</div>
           <div className="body-text mb-2">
-            New schedule will be added to your routine
+            New schedule will be added to your routine.
           </div>
           <hr />
           <div className="row">
