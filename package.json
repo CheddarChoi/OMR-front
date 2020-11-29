@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
+    "moment": "^2.29.1",
     "node-sass": "^4.0.0",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.0",
@@ -16,6 +17,7 @@
     "react-minimal-pie-chart": "^8.1.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
+    "react-timetable-events": "^1.0.2",
     "web-vitals": "^0.2.4"
   },
   "scripts": {

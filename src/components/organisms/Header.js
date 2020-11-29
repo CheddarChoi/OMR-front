@@ -59,31 +59,41 @@ const Header = () => {
   }, [name]);
 
   return (
-    <div className="mb-3">
+    <div
+      className="mb-3"
+      style={{
+        fontFamily: "Nanum Gothic",
+      }}
+    >
       <Navbar as={Container} collapseOnSelect expand="lg">
         <Navbar.Brand href="/home">
           <img
             alt=""
             src={logo}
             width="auto"
-            height="40"
-            className="d-inline-block align-top"
+            height="36"
+            className="d-inline-block align-top mr-5"
           />{" "}
         </Navbar.Brand>
         <div className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <Link to={"/schedules"} className="nav-link">
-              Schedules
-            </Link>
-          </li>
-          <li className="nav-item">
+          <li className="nav-item custom-nav-item">
             <Link to={"/chart"} className="nav-link">
-              Chart
+              My Routine
             </Link>
           </li>
-          <li className="nav-item">
+          <li className="nav-item custom-nav-item">
+            <Link to={"/schedules"} className="nav-link">
+              Edit Routine
+            </Link>
+          </li>
+          <li className="nav-item custom-nav-item">
             <Link to={"/add"} className="nav-link">
-              Add
+              Add Schedule
+            </Link>
+          </li>
+          <li className="nav-item custom-nav-item">
+            <Link to={"/"} className="nav-link">
+              Share
             </Link>
           </li>
         </div>

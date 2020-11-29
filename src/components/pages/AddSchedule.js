@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import * as scheduleAPI from "../../api/scheduleAPI";
 import ScheduleForm from "../organisms/ScheduleForm";
 import Header from "../organisms/Header";
+import ScheduleTimetable from "../organisms/ScheduleTimetable";
 
 export default class AddSchedule extends Component {
   constructor(props) {
@@ -99,29 +100,46 @@ export default class AddSchedule extends Component {
     return (
       <div>
         <Header />
-        <div className="submit-form">
-          {this.state.submitted ? (
-            <div>
-              <h4>You submitted successfully!</h4>
-              <button className="btn btn-success" onClick={this.newSchedule}>
-                Add
-              </button>
+        <div className="container">
+          <div className="title-text mt-5">Add New Schedule</div>
+          <div className="body-text mb-2">
+            New schedule will be added to your routine
+          </div>
+          <hr />
+          <div className="row">
+            <div className="col-7">
+              <div className="pr-2">
+                {this.state.submitted ? (
+                  <div>
+                    <h4>You submitted successfully!</h4>
+                    <button
+                      className="btn btn-success"
+                      onClick={this.newSchedule}
+                    >
+                      Add
+                    </button>
+                  </div>
+                ) : (
+                  <ScheduleForm
+                    name={this.state.name}
+                    onChangeName={this.onChangeName}
+                    shortName={this.state.shortName}
+                    onChangeShortName={this.onChangeShortName}
+                    startTime={this.state.startTime}
+                    onChangeStartTime={this.onChangeStartTime}
+                    endTime={this.state.endTime}
+                    onChangeEndTime={this.onChangeEndTime}
+                    color={this.state.color}
+                    onChangeColor={this.onChangeColor}
+                    saveSchedule={this.saveSchedule}
+                  />
+                )}
+              </div>
             </div>
-          ) : (
-            <ScheduleForm
-              name={this.state.name}
-              onChangeName={this.onChangeName}
-              shortName={this.state.shortName}
-              onChangeShortName={this.onChangeShortName}
-              startTime={this.state.startTime}
-              onChangeStartTime={this.onChangeStartTime}
-              endTime={this.state.endTime}
-              onChangeEndTime={this.onChangeEndTime}
-              color={this.state.color}
-              onChangeColor={this.onChangeColor}
-              saveSchedule={this.saveSchedule}
-            />
-          )}
+            <div className="col-5 pt-2">
+              <ScheduleTimetable />
+            </div>
+          </div>
         </div>
       </div>
     );

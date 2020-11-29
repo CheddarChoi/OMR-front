@@ -4,6 +4,8 @@ $theme-colors: (
   "primary": #563e2e,
 );
 
+$primary: #563e2e;
+
 body {
   font-family: "Nanum Gothic", sans-serif;
 }
@@ -97,6 +99,55 @@ body {
 .login-button {
   margin-top: 15px !important;
   float: right;
+}
+
+.custom-nav-item {
+  margin-right: 1rem;
+}
+
+.styles_hour__EXCif {
+  background-color: white !important;
+  color: black !important;
+}
+
+.styles_day_title__1y-BE {
+  background-color: $primary !important;
+}
+
+.styles_event__2jA91 {
+  background-color: #e9a345 !important;
+}
+
+.title-text {
+  font-family: NanumSquare;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 1.6rem;
+  line-height: 140%;
+}
+
+.title-text-light {
+  font-family: NanumSquare;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 140%;
+}
+
+.body-text {
+  font-family: NanumSquare;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 140%;
+}
+
+.subtitle-text {
+  font-family: NanumSquare;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 140%;
 }
 
 @import "~bootstrap/scss/bootstrap.scss";

@@ -20,22 +20,27 @@ export default class AddSchedule extends Component {
     return (
       <div>
         <div className="form-group">
-          <label htmlFor="name">Name</label>
+          <label className="subtitle-text" htmlFor="name">
+            Name
+          </label>
           <input
             type="text"
-            className="form-control"
+            className="form-control body-text"
             id="name"
             required
             value={name}
             onChange={onChangeName}
             name="name"
+            placeholder="Enter the name of the schedule"
           />
         </div>
         <div className="form-group">
-          <label htmlFor="startTime">Start Time</label>
+          <label className="subtitle-text" htmlFor="startTime">
+            Start Time
+          </label>
           <input
             type="time"
-            className="form-control"
+            className="form-control body-text"
             id="startTime"
             required
             value={startTime}
@@ -44,10 +49,12 @@ export default class AddSchedule extends Component {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="endTime">End Time</label>
+          <label className="subtitle-text" htmlFor="endTime">
+            End Time
+          </label>
           <input
             type="time"
-            className="form-control"
+            className="form-control body-text"
             id="endTime"
             required
             value={endTime}
@@ -56,11 +63,11 @@ export default class AddSchedule extends Component {
           />
         </div>
         <div>
-          <label>Label</label>
+          <label className="subtitle-text">Label</label>
           <ColorPicker color={color} onChangeColor={onChangeColor} />
           <input
             type="text"
-            className="form-control"
+            className="form-control body-text"
             id="shortName"
             required
             value={shortName}
