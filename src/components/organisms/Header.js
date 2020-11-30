@@ -5,14 +5,14 @@ import logo from "../../Logo.png";
 import * as loginAPI from "../../api/loginAPI";
 import getServerSideProps from "../../utils/checkAuth";
 
-const Header = () => {
+const Header = ({ history }) => {
   const [props, setProps] = useState({});
   const [authButtonBar, setAuthButtonBar] = useState(<div />);
   const [name, setName] = useState(props.name || "NoName");
 
   const tryLogout = () => {
-    loginAPI.logout();
-    // loginAPI.logout().then((res) => history.push("/home"));
+    // loginAPI.logout();
+    loginAPI.logout().then((res) => history.push("/home"));
   };
 
   useEffect(() => {
@@ -95,4 +95,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default withRouter(Header);
