@@ -59,6 +59,10 @@ export default class AddSchedule extends Component {
             name="endTime"
           />
           <label className="subtitle-text">Label</label>
+          <label className="small-text ml-2">
+            Label will be visible to other users when you set your routine as
+            pubilc.
+          </label>
           <div className="d-flex">
             <ColorPicker color={color} onChangeColor={onChangeColor} />
             <input

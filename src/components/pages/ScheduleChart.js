@@ -142,7 +142,7 @@ const ScheduleChart = () => {
             />
           </div>
           <div className="col-5">
-            <div className="d-flex flex-row-reverse mb-5">
+            <div className="d-flex flex-row-reverse mb-5 align-items-center">
               <Link to="/schedules" className="btn btn-outline-primary ml-2">
                 <EditIcon />
               </Link>
@@ -156,6 +156,10 @@ const ScheduleChart = () => {
               >
                 <ShareIcon />
               </button>
+              <div className="small-text align-bottom text-right mr-2">
+                Click here to <br />
+                share your routine
+              </div>
             </div>
             <div
               className="subtitle-text mb-2 mt-2"
