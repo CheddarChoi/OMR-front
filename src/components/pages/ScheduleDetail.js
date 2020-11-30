@@ -1,13 +1,17 @@
 import React, { Component } from "react";
 import * as scheduleAPI from "../../api/scheduleAPI";
 import Header from "../organisms/Header";
+import ScheduleTimetable from "../organisms/ScheduleTimetable";
+import ScheduleForm from "../organisms/ScheduleForm";
 
 export default class Schedule extends Component {
   constructor(props) {
     super(props);
     this.onChangeName = this.onChangeName.bind(this);
+    this.onChangeShortName = this.onChangeShortName.bind(this);
     this.onChangeStartTime = this.onChangeStartTime.bind(this);
     this.onChangeEndTime = this.onChangeEndTime.bind(this);
+    this.onChangeColor = this.onChangeColor.bind(this);
     this.getSchedule = this.getSchedule.bind(this);
     this.updateSchedule = this.updateSchedule.bind(this);
     this.deleteSchedule = this.deleteSchedule.bind(this);
@@ -16,8 +20,10 @@ export default class Schedule extends Component {
       currentSchedule: {
         id: null,
         name: "",
+        shortName: "",
         startTime: "",
         endTime: "",
+        color: "",
       },
       message: "",
     };
@@ -41,6 +47,19 @@ export default class Schedule extends Component {
     });
   }
 
+  onChangeShortName(e) {
+    const shortName = e.target.value;
+
+    this.setState(function (prevState) {
+      return {
+        currentSchedule: {
+          ...prevState.currentSchedule,
+          shortName: shortName,
+        },
+      };
+    });
+  }
+
   onChangeStartTime(e) {
     const startTime = e.target.value;
 
@@ -59,6 +78,17 @@ export default class Schedule extends Component {
       currentSchedule: {
         ...prevState.currentSchedule,
         endTime: endTime,
+      },
+    }));
+  }
+
+  onChangeColor(e) {
+    const color = e.target.value;
+
+    this.setState((prevState) => ({
+      currentSchedule: {
+        ...prevState.currentSchedule,
+        color: color,
       },
     }));
   }
@@ -110,56 +140,40 @@ export default class Schedule extends Component {
       <div>
         <Header />
         {currentSchedule ? (
-          <div className="edit-form">
-            <h4>Schedule</h4>
-            <form>
-              <div className="form-group">
-                <label htmlFor="name">Name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="name"
-                  value={currentSchedule.name}
-                  onChange={this.onChangeName}
+          <div className="container">
+            <div className="title-text mt-5">Edit Schedule</div>
+            <div className="small-text mb-2">
+              Schedule will be updated to your routine.
+            </div>
+            <hr />
+            <div className="row">
+              <div className="col-7">
+                <ScheduleForm
+                  name={this.state.currentSchedule.name}
+                  onChangeName={this.onChangeName}
+                  shortName={this.state.currentSchedule.shortName}
+                  onChangeShortName={this.onChangeShortName}
+                  startTime={this.state.currentSchedule.startTime}
+                  onChangeStartTime={this.onChangeStartTime}
+                  endTime={this.state.currentSchedule.endTime}
+                  onChangeEndTime={this.onChangeEndTime}
+                  color={this.state.currentSchedule.color}
+                  onChangeColor={this.onChangeColor}
+                  saveSchedule={this.updateSchedule}
+                  buttonText="Update"
                 />
+                <button
+                  className="btn btn-outline-primary"
+                  onClick={this.deleteSchedule}
+                >
+                  Delete
+                </button>
+                <p>{this.state.message}</p>
               </div>
-              <div className="form-group">
-                <label htmlFor="startTime">Start Time</label>
-                <input
-                  type="time"
-                  className="form-control"
-                  id="startTime"
-                  value={currentSchedule.startTime}
-                  onChange={this.onChangeStartTime}
-                />
+              <div className="col-5 pt-2">
+                <ScheduleTimetable />
               </div>
-              <div className="form-group">
-                <label htmlFor="endTime">End Time</label>
-                <input
-                  type="time"
-                  className="form-control"
-                  id="endTime"
-                  value={currentSchedule.endTime}
-                  onChange={this.onChangeEndTime}
-                />
-              </div>
-            </form>
-
-            <button
-              className="badge badge-danger mr-2"
-              onClick={this.deleteSchedule}
-            >
-              Delete
-            </button>
-
-            <button
-              type="submit"
-              className="badge badge-success"
-              onClick={this.updateSchedule}
-            >
-              Update
-            </button>
-            <p>{this.state.message}</p>
+            </div>
           </div>
         ) : (
           <div>

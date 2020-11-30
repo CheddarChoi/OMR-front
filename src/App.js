@@ -4,7 +4,7 @@ import "./App.scss";
 
 import ScheduleList from "./components/pages/ListSchedule";
 import ScheduleChart from "./components/pages/ScheduleChart";
-import AddSchedule from "./components/pages/AddSchedule";
+import Add from "./components/pages/Add";
 import Schedule from "./components/pages/ScheduleDetail";
 import Login from "./components/pages/Login";
 import Home from "./components/pages/Home";
@@ -21,7 +21,7 @@ const App = () => {
         <Route exact path="/schedules" component={ScheduleList} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
-        <Route exact path="/add" component={AddSchedule} />
+        <Route exact path="/add" component={Add} />
         <Route exact path="/share" component={ShareRoutine} />
         <Route exact path="/timetable" component={ScheduleTimetable} />
         <Route path="/schedules/:id" component={Schedule} />

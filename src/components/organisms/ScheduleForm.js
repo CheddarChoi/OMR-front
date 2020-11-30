@@ -15,6 +15,7 @@ export default class AddSchedule extends Component {
       color,
       onChangeColor,
       saveSchedule,
+      buttonText,
     } = this.props;
 
     return (
@@ -78,7 +79,7 @@ export default class AddSchedule extends Component {
             onClick={saveSchedule}
             className="btn btn-primary mt-4"
           >
-            Submit
+            {buttonText}
           </button>
         </form>
       </div>

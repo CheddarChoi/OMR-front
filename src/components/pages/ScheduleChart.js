@@ -45,7 +45,6 @@ const ScheduleChart = () => {
         .sort((a, b) => time2dec(a.startTime) - time2dec(b.startTime))
         .map((schedule) => {
           time = time2dec(schedule.startTime);
-          console.log(time2dec(schedule.startTime));
           if (currTime !== time) {
             let newPaddingData = {
               title: "",
@@ -165,7 +164,7 @@ const ScheduleChart = () => {
               Insights
             </div>
             <div className="subtitle-text">
-              You've completed {timeSum}/24 hours of your day.
+              You've completed {timeSum | 0}/24 hours of your day.
             </div>
             {timeSum < 23 ? (
               <div className="body-text mb-2">

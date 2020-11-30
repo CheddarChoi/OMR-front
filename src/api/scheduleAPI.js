@@ -14,7 +14,15 @@ export const get = (id) => schedule.get(`/${id}`);
 
 export const getByUser = (userid) => schedule.get(`/getByUser/${userid}`);
 
-export const create = (data) => schedule.post("", data);
+export const create = (data) => {
+  schedule.post("/", {
+    name: data.name,
+    shortName: data.shortName,
+    startTime: data.startTime,
+    endTime: data.endTime,
+    color: data.color,
+  });
+};
 
 export const update = (id, data) => schedule.put(`/${id}`, data);
 
