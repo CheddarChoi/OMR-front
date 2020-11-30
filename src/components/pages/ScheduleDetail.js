@@ -83,7 +83,7 @@ export default class Schedule extends Component {
   }
 
   onChangeColor(e) {
-    const color = e.target.value;
+    const color = e.hex;
 
     this.setState((prevState) => ({
       currentSchedule: {
