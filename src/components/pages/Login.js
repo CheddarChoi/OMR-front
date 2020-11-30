@@ -72,7 +72,6 @@ const AdminLoginPage = ({ history }) => {
             <Form.Group>
               <Form.Label className="body-text">Password</Form.Label>
               <Form.Control
-                className="body-text"
                 type="password"
                 onChange={(value) => setPassword(value.target.value)}
               />
