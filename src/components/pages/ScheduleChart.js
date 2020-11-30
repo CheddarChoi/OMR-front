@@ -126,6 +126,7 @@ const ScheduleChart = () => {
         <div className="row">
           <div className="col-7">
             <PieChart
+              style={{ paddingRight: "2rem" }}
               data={chartData}
               startAngle={270}
               totalValue={24}
@@ -137,7 +138,7 @@ const ScheduleChart = () => {
                 fontSize: "0.2rem",
                 fontFamily: "NanumSquare",
               })}
-              radius={40}
+              radius={36}
               labelPosition={108}
             />
           </div>
