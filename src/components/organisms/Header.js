@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import logo from "../../Logo.png";
 import * as loginAPI from "../../api/loginAPI";
 import getServerSideProps from "../../utils/checkAuth";
 
-const Header = () => {
+const Header = ({ history }) => {
   const [props, setProps] = useState({});
   const [authButtonBar, setAuthButtonBar] = useState(<div />);
   const [name, setName] = useState(props.name || "NoName");
 
   const tryLogout = () => {
-    loginAPI.logout().then((res) => window.location.reload());
+    loginAPI.logout().then((res) => history.push("/home"));
   };
 
   useEffect(() => {
@@ -94,4 +94,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default withRouter(Header);
