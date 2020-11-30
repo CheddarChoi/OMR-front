@@ -76,8 +76,6 @@ export default class AddSchedule extends Component {
       color: this.state.color,
     };
 
-    console.log(data);
-
     scheduleAPI
       .create(data)
       .then((response) => {
@@ -96,7 +94,6 @@ export default class AddSchedule extends Component {
         if (e.response.status === 400) {
           this.setState({ showModal: true, modal: e.response.data });
         }
-        console.log(e);
       });
   }
 

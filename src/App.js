@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Switch, Route } from "react-router-dom";
 import "./App.scss";
 
@@ -18,7 +18,7 @@ const App = () => {
       <Switch>
         <Route exact path={["/", "/home"]} component={Home} />
         <Route exact path="/chart" component={ScheduleChart} />
-        <Route exact path="/schedule" component={ScheduleList} />
+        <Route exact path="/schedules" component={ScheduleList} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/add" component={AddSchedule} />
