@@ -45,6 +45,7 @@ const Add = () => {
     if (!startTime) return;
     if (!endTime) return;
     if (!shortName && !/^\s+$/.test(shortName)) return;
+    if (startTime > endTime) return;
 
     var data = {
       name: title,
