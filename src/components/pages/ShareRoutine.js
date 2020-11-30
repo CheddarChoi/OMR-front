@@ -42,7 +42,7 @@ const ShareRoutine = () => {
             chartData.push(newPaddingData);
           }
           let newChartData = {
-            title: schedule.name,
+            title: schedule.shortName,
             value: time2dec(schedule.endTime) - time,
             color: schedule.color,
           };
